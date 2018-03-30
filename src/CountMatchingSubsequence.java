@@ -41,4 +41,16 @@ public class CountMatchingSubsequence {
         }
         return count;
     }
+    
+    public boolean isSubSequence(String shortStr, String longStr) {
+        if (shortStr.length() > longStr.length()) return false;
+        
+        int i = 0;
+        for (char ch : longStr.toCharArray()) {
+            if (i < shortStr.length() && ch == shortStr.charAt(i))
+                i++;
+        }
+        
+        return i == shortStr.length();
+    }
 }

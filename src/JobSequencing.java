@@ -78,7 +78,7 @@ public class JobSequencing {
         System.out.print("Total profit earned: " + profitTotal);
     }
     
-    static int findLatestDDL(Job[] arr) {
+    private static int findLatestDDL(Job[] arr) {
         int latest = 0;
         for (Job job: arr) {
             latest = Math.max(latest, job.deadline);
@@ -87,7 +87,7 @@ public class JobSequencing {
         return latest;
     }
     
-    public static void printJobSequencingDS(Job[] arr, int n) {
+    private static void printJobSequencingDS(Job[] arr, int n) {
         Arrays.sort(arr);
         
         int latestDDL = findLatestDDL(arr);
