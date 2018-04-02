@@ -1,6 +1,3 @@
-import sun.text.normalizer.Trie;
-
-import javax.print.DocFlavor;
 import java.util.*;
 
 public class WordSearcher {
