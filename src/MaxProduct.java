@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MaxProduct {
     public int maxProduct(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
@@ -22,4 +24,14 @@ public class MaxProduct {
 
         return maxProduct;
     }
+    
+    public int maxProductOf3Numbers(int[] nums) {
+        if (nums == null || nums.length < 3) return 0;
+        Arrays.sort(nums);
+        int len = nums.length;
+        
+        return Math.max(nums[len-1] * nums[len-2] * nums[len-3], nums[len-1] * nums[0] * nums[1]);
+    }
+    
+    // One way to get rid of the NlogN time for sorting => using one scan only record the largest 3 and smallest 2
 }
