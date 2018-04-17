@@ -86,6 +86,45 @@ public class RedundantEdge {
         return new int[0];
     }
     
+    public int[] findRedundantDirectedConnection(int[][] edges) {
+        if (edges == null || edges.length == 0 || edges[0].length == 0) return null;
+        
+        int len = edges.length;
+        int[] parent = new int[len + 1];
+    
+        int[] newComer = {-1,-1}, preExist = {-1, -1};
+        
+        for (int[] edge : edges) {
+            if (parent[edge[1]] == 0)
+                parent[edge[1]] = edge[0];
+            else {
+                newComer = edge.clone();
+                preExist = new int[]{parent[edge[1]], edge[1]};
+                
+                // Break the new problematic edge
+                edge[1] = 0;
+            }
+        }
+        
+        for (int i = 0; i <= len; i++) parent[i] = i;
+        
+        for (int[] edge : edges) {
+            if (edge[1] == 0) continue;
+            
+            if (findRoot(parent, edge[0]) == edge[1]) {
+                if (preExist[0] != -1) return preExist;
+                else return edge;
+            }
+            parent[edge[1]] = edge[0];
+        }
+        return newComer;
+    }
+    
+    private int findRoot(int[] parent, int x) {
+        while(x != parent[x]) x = parent[x];
+        return x;
+    }
+    
     
     
     
