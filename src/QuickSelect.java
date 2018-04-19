@@ -1,21 +1,50 @@
 public class QuickSelect {
     public static void main(String[] args) {
-    
+        QuickSelect test = new QuickSelect();
+        
+        int[] arr = {3,8,5,2,1};
+        
+        int s1 = test.findKSmall(arr.clone(), 1);
+        int s3 = test.findKSmall(arr.clone(), 3);
     }
     
-//    // Using quick select to find the k-th largest element in an un-sorted array
-//    public int findKthElement(int[] array, int k) {
-//
-//    }
-//
-//    private int findKHelper(int[] array, int k, int left, int right) {
-//        if (left == right) return array[left];
-//        int l = left, r = right, pivot = array[r];
-//        while(l < r) {
-//            while(r > l && array[r] >= pivot) r--;
-//            if (r > l) array[l++] = array[r];
-//            while(l < r && array[l] <= )
-//        }
-//    }
+    // Problem scope : in an unsorted array, find the k-th smallest element
+    public int findKSmall(int[] arr, int k) {
+        if (arr == null || arr.length < k) return 0;
+        
+        int left = 0, right = arr.length - 1;
+        while(left < right) {
+            int pivot = partition(arr, left, right);
+            
+            if (pivot - left == k - 1) return arr[pivot];
+            else if (pivot - left > k - 1) right = pivot - 1;
+            else {
+                left = pivot + 1;
+                k = k - pivot - 1;
+            }
+        }
+        
+        return arr[left];
+        
+    }
+    
+    private int partition(int[] arr, int left, int right) {
+        int pivot = arr[right], i = left;
+        
+        for (int j = i; j < right; j++) {
+            if (arr[j] > pivot) continue;
+            swap(arr, i++, j);
+        }
+        
+        swap(arr, i, right);
+        return i;
+    }
+    
+    private void swap(int[] arr, int idx1, int idx2) {
+        if (idx1 == idx2) return;
+        int temp = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = temp;
+    }
     
 }
