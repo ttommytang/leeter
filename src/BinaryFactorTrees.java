@@ -29,7 +29,7 @@ class BinaryFactorTrees {
         	memo.put(num, subs);
         }
 
-        return res % MOD;
+        return (int)res % MOD;
     }
 
 }
