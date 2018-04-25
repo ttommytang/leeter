@@ -5,7 +5,7 @@ class VacationDays {
 		VacationDays test = new VacationDays();
 
 		int[][] F = {{0,1,1}, {1,0,1}, {1,1,0}};
-		int[][] D = {{7,0,0}, {0,7,0}, {0,0,7}};
+		int[][] D = {{1,3,1}, {6,0,3}, {3,3,3}};
 
 		int v = test.maxVacationDaysDP(F, D);
 		System.out.println(v);
@@ -55,7 +55,7 @@ class VacationDays {
     	}
 
     	for (int w = 1; w < W; w++) {
-    		preWeek = curWeek;
+    		preWeek = curWeek.clone();
     		for (int c = 0; c < C; c++) {
     			int max = Integer.MIN_VALUE;
     			for (int from = 0; from < C; from++) {
