@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.LinkedList;
 
 class ShortStringEncoding {
 	public static void main(String[] args) {
@@ -34,7 +35,7 @@ class ShortStringEncoding {
 				if (cur.children.size() == 0) 
 					res += length + 1;
 				else
-					queue.addAll(cur.values());
+					queue.addAll(cur.children.values());
 			}
 		}
 
