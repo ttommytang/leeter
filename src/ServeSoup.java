@@ -1,7 +1,7 @@
 public class ServeSoup {
     public static void main(String[] args) {
         ServeSoup test = new ServeSoup();
-        double prob = test.soupServingsDP(1);
+        double prob = test.soupServingsDP(100);
     }
     
     public double soupServings(int N) {
@@ -23,8 +23,11 @@ public class ServeSoup {
         soupHelper(ALeft - 25, BLeft - 75, prob * 0.25, res);
     }
     
-    private double soupServingsDP(int N) {
-        int n = N/25 + N%25 == 0 ? 0 : 1;
+    public double soupServingsDP(int N) {
+        int n = N/25 + (N%25 == 0 ? 0 : 1);
+        if (n > 500)
+            return 1;
+        
         double[][] dp = new double[n+1][n+1];
         
         for (int i = 0; i <= n; i++) dp[0][i] = 1;
@@ -32,14 +35,17 @@ public class ServeSoup {
         
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
-                dp[i][j] += 0.25 * dp[Math.max(i-4, 0)][j];
-                dp[i][j] += 0.25 * dp[Math.max(i-3, 0)][Math.max(j-1, 0)];
-                dp[i][j] += 0.25 * dp[Math.max(i-2, 0)][Math.max(j-2, 0)];
-                dp[i][j] += 0.25 * dp[Math.max(i-1, 0)][Math.max(j-3, 0)];
+                double ans = 0.25 * (dp[M(i-4)][j] + dp[M(i-3)][M(j-1)]
+                        + dp[M(i-2)][M(j-2)] + dp[M(i-1)][M(j-3)]);
+                dp[i][j] = ans;
             }
         }
         
         return dp[n][n];
+    }
+    
+    private int M(int x) {
+        return Math.max(0, x);
     }
     
 }
